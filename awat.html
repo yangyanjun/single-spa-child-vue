@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>await</title>
+</head>
+<body>
+    <script>
+        function request1() {
+            return new Promise((resolve, reject)=> {
+                setTimeout(()=>{
+                    resolve(2)
+                }, 3000)
+            })
+        }
+        function request2() {
+            return new Promise((resolve, reject)=> {
+                setTimeout(()=>{
+                    resolve(4)
+                }, 1000)
+            })
+        }
+        async function a() {
+            const r = await request1();
+            console.log(1111);
+            localStorage.setItem('pubsToken', r)
+            
+        }
+        async function b() {
+            console.log('pubsToken', localStorage.getItem('pubsToken'))
+            const r = await request2();
+            console.log(r)
+        }
+        async function c() {
+            await a();
+            await b();
+        }
+        c();
+    </script>
+</body>
+</html>
